@@ -37,11 +37,11 @@ function GoogleSheets.new(Document: string, Page: string|number)
 
 	--			Get from web				--
 	local success, data = pcall(HTTP.GetAsync, HTTP, self.URL)
-	if not success or not data then			return warn("GoogleSheets error:", data)			end
+	if not success or not data then		return warn("GoogleSheets error:", data)	end
 
 	--			Get JSON				--
 	local success, JSON = pcall(HTTP.JSONDecode, HTTP, data:sub(48, #data - 2))
-	if not success or not JSON then			return warn("GoogleSheets error:", JSON)			end
+	if not success or not JSON then		return warn("GoogleSheets error:", JSON)	end
 	self.Information = JSON
 
 	return self
