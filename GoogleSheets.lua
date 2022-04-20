@@ -38,7 +38,7 @@ type GST = {
 local GoogleSheets = {}
 function GoogleSheets:GetByCell(Letter: string, Number: number)
 	local self = self :: GST
-	if not self.Information.table.rows[Number] then			return nil			end
+	if not self.Information.table.rows[Number] then		return nil		end
 	
 	local LetterIndex = table.find(Letters, Letter)
 	local Info = self.Information.table.rows[Number].c[LetterIndex]
@@ -49,7 +49,7 @@ function GoogleSheets:Update()
 	
 	--			Get from web				--
 	local success, data = pcall(HTTP.GetAsync, HTTP, self.URL)
-	if not success or not data then			return warn("GoogleSheets error:", data)			end
+	if not success or not data then		return warn("GoogleSheets error:", data)		end
 
 	--			Get JSON				--
 	local success, JSON = pcall(HTTP.JSONDecode, HTTP, data:sub(48, #data - 2))
