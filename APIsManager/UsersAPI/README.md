@@ -1,7 +1,7 @@
 # Search
-> **Description:** Search for information from users with names similar to `Keyword`
-> **Parameters:** `Keyword: string`, `Limits: number`
-> **Return:**
+- **Description:** Search for information from users with names similar to `Keyword`
+- **Parameters:** `Keyword: string`, `Limits: number`
+- **Return:**
 ```lua
 {
     displayName: string,
@@ -13,9 +13,9 @@
 ```
 ___
 # UserInfo
-> **Description:** Obtains user information from their UserId.
-> **Parameters:** `UserId: number`
-> **Return:**
+- **Description:** Obtains user information from their UserId.
+- **Parameters:** `UserId: number`
+- **Return:**
 ```lua
 {
     description: string,
