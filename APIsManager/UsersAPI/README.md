@@ -26,7 +26,7 @@ Data: {
         hasVerifiedBadge: boolean,
         id: number,
         name: string,
-       displayName: string
+        displayName: string
     }
 }
 ```
