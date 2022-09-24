@@ -2,7 +2,7 @@
 - **Description:** Returns the messages in the wall of the selected group and ordered in pages.
 - **Parameters:** `GroupId: number`, `Limits: number`, `Asc: boolean`
 - **Return:** [`CursorObject`](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#cursorobject)
-> Cursor data:
+* **Cursor data:**
 ````lua
 {
 	[number]: {
@@ -27,3 +27,5 @@
 	}
 }
 ````
+
+
