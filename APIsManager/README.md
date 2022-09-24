@@ -2,7 +2,7 @@
 # Index
 1. [Start - Google](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---google)
 2. [Start - Roblox Studio](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---roblox-studio)
-3. [Global classes](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---roblox-studio)
+3. [More information](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#More-information)
 
 ______
 # Start - Google
@@ -55,7 +55,7 @@ local APIsManager = require(game:GetService("ServerStorage").APIsManager).new(Sc
 3. Look at the documentation and call the methods!
 ___
 
-# Global classes
+# More information
 ## CursorObject
 * **Type:** 
 ```lua
