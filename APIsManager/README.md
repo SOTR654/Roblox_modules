@@ -58,7 +58,7 @@ local APIsManager = require(game:GetService("ServerStorage").APIsManager).new(Sc
 3. Look at the documentation and call the methods!
 ___
 
-## Global classes
+# Global classes
 ```lua
 local Cursor = APIsManager.UsersAPI:NameHistory(UserName, 50, true)
 
