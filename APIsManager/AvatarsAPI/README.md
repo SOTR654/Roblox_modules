@@ -56,5 +56,48 @@
 	}
 }
 ````
-
+# GetCurrentAssets
+- **Description:** Gets the id of the assets used by the given User.
+- **Parameters:** `UserId: number`
+- **Return:** `{number}`
+# GetOutfitIdDetails
+- **Description:** Get details of the given Outfit or bundle.
+- **Parameters:** `OutfitId: number`
+- **Return:**
+````lua
+{
+	assets: {
+       [number]: {
+          assetType:{
+			id: number,
+            name: string
+		  },
+          currentVersionId: number,
+          id: number,
+          name: string
+       },
+    },
+    bodyColors: {
+       headColorId: number,
+       leftArmColorId: number,
+       leftLegColorId: number,
+       rightArmColorId: number,
+       rightLegColorId: number,
+       torsoColorId: number
+    },
+    id: number,
+    isEditable: boolean,
+    name: string,
+    outfitType: string,
+    playerAvatarType: string,
+    scale: {
+       bodyType: number,
+       depth: number,
+       head: number,
+       height: number,
+       proportion: number,
+       width: number
+    }
+}
+````
 
