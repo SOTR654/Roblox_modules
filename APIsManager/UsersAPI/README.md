@@ -1,4 +1,6 @@
 # Search
-**Parameters:** Letter: string, Number: number.
-**Description:** Obtains the content of the document by the cols(Letter) and its row(Number).
+**Description:** Search for information from users with names similar to `Keyword`
+
+**Parameters:** `Keyword: string`, `Limits: number`
+
 **Return:** string?
