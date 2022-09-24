@@ -1,7 +1,13 @@
+
 # Description
 Module for Roblox Studio to easily manage API access through Google.
-___
-[details="Instalation"]
+__
+# Index
+1. Start - Google
+2. Start - Roblox Studio
+3. Global classes
+
+__
 # Start - Google
 1. Go ```https://script.google.com/home/``` and log in.
 
@@ -41,6 +47,7 @@ function doGet(e) {
   ![image](https://user-images.githubusercontent.com/45367427/192006252-879f130e-0dc6-4812-88e1-cc452da60c5d.png)
 
 ___
+
 # Start - Roblox Studio
 1. Get the module and place it in your game, for more security place it in ServerStorage.
 2. Require the module, call ```new``` and give it the ```script id``` of the Google project.
@@ -49,9 +56,9 @@ local ScriptId = "#######-######_###" -- Google script id
 local APIsManager = require(game:GetService("ServerStorage").APIsManager).new(ScriptId)
 ```
 3. Look at the documentation and call the methods!
-[/details]
+___
 
-## S
+## Global classes
 ```lua
 local Cursor = APIsManager.UsersAPI:NameHistory(UserName, 50, true)
 
