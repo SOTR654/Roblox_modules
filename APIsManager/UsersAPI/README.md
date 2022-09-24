@@ -19,13 +19,13 @@ ___
 ```lua
 {
     description: string,
-	created: string,
-	isBanned: boolean,
-	externalAppDisplayName: string,
-	hasVerifiedBadge: boolean,
-	id: number,
-	name: string,
-	displayName: string
+    created: string,
+    isBanned: boolean,
+    externalAppDisplayName: string,
+    hasVerifiedBadge: boolean,
+    id: number,
+    name: string,
+    displayName: string
 }
 ```
 ___
