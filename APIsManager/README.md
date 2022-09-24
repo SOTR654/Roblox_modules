@@ -6,12 +6,12 @@
 
 
 # Index
-1. [Star - Google](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#star---google)
-2. [Star - Roblox Studio](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#star---roblox-studio)
+1. [Google](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#google)
+2. [Roblox Studio](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#roblox-studio)
 3. [More information](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#More-information)
 
 ______
-# Star - Google
+# Google
 1. Go ```https://script.google.com/home/``` and log in.
 
 2. Tap New Project.
@@ -51,7 +51,7 @@ function doGet(e) {
 
 ___
 
-# Star - Roblox Studio
+# Roblox Studio
 1. Get the module and place it in your game, for more security place it in ServerStorage.
 2. Require the module, call ```new``` and give it the ```script id``` of the Google project.
 ```lua
