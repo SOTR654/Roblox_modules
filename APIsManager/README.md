@@ -1,4 +1,6 @@
 **Description:** module for Roblox Studio to easily manage API access through Google.
+**Devforum:** https://devforum.roblox.com/t/apismanager-easily-get-information-from-roblox-apis/1994157
+
 # Index
 1. [Start - Google](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---google)
 2. [Start - Roblox Studio](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---roblox-studio)
