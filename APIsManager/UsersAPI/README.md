@@ -5,9 +5,13 @@
 
 **Return:** {
     displayName: string,
+
     hasVerifiedBadge: boolean,
+
     id: number,
+    
     name: string,
+
     previousUsernames: {string}
 }
 ___
