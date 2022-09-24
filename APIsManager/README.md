@@ -1,13 +1,13 @@
 
 # Description
 Module for Roblox Studio to easily manage API access through Google.
-__
+_____
 # Index
 1. Start - Google
 2. Start - Roblox Studio
 3. Global classes
-
-__
+______
+______
 # Start - Google
 1. Go ```https://script.google.com/home/``` and log in.
 
