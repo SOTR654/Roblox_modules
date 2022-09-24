@@ -1,6 +1,8 @@
 # Search
 **Description:** Search for information from users with names similar to `Keyword`
+
 **Parameters:** `Keyword: string`, `Limits: number`
+
 **Return:** {
     displayName: string,
     hasVerifiedBadge: boolean,
@@ -11,7 +13,9 @@
 ___
 # UserInfo
 **Description:** Obtains user information from their UserId.
+
 **Parameters:** `UserId: number`
+
 **Return:** {
     description: string,
 	created: string,
