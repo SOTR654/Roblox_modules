@@ -1,6 +1,7 @@
-# APIsManager
+# Description
 Module for Roblox Studio to easily manage API access through Google.
 ___
+[details="Instalation"]
 # Start - Google
 1. Go ```https://script.google.com/home/``` and log in.
 
@@ -48,3 +49,21 @@ local ScriptId = "#######-######_###" -- Google script id
 local APIsManager = require(game:GetService("ServerStorage").APIsManager).new(ScriptId)
 ```
 3. Look at the documentation and call the methods!
+[/details]
+
+## S
+```lua
+local Cursor = APIsManager.UsersAPI:NameHistory(UserName, 50, true)
+
+local Data1 = Cursor.Data
+Cursor:Next()           -- Search for 50 more names, if they do not exist a warning will appear.
+
+local Data2 = Cursor.Data
+Cursor:Before()         -- Returns the previous search.
+
+local Data3 = Cursor.Data
+print(Data3 == Data2)   -- true
+```
+
+
+
