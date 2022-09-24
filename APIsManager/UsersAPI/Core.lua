@@ -2,33 +2,29 @@ local Multiple = require(script.Parent.Multiple)
 local Bases = {
 	Search = "https://users.roblox.com/v1/users/search?keyword=%s&limit=%d",
 	UserInfo = "https://users.roblox.com/v1/users/%d",
-	History = "https://users.roblox.com/v1/users/%d/username-history?limit=%d&sortOrder=%s"
+	NameHistory = "https://users.roblox.com/v1/users/%d/username-history?limit=%d&sortOrder=%s"
 }
 
 
 
 --			Methods			--
 local Methods = {}
-function Methods:Search(Keyword: string, Limits: number): Multiple.UseCursor
+function Methods:Search(Keyword: string, Limits: number): Multiple.CursorObject
 	local Link = Bases.Search:format(Keyword, Limits)
-
-	--			Cursor			--
 	return Multiple.UseCursor(Link, self.GoogleUrl)
 end
 function Methods:UserInfo(UserId: number): UserInfo
 	local Link = Bases.UserInfo:format(UserId)
 	return Multiple.GetAsync(Link, self.GoogleUrl)
 end
-function Methods:History(UserId: number, Limits: number, Asc: boolean): Multiple.UseCursor?
+function Methods:NameHistory(UserId: number, Limits: number, Asc: boolean): Multiple.CursorObject
 	local Sort = (if Asc then "Asc" else "Desc")
-	local Link = Bases.History:format(UserId, Limits, Sort)
-	
-	--			Cursor			--
+	local Link = Bases.NameHistory:format(UserId, Limits, Sort)
 	return Multiple.UseCursor(Link, self.GoogleUrl, function(data)
 		local NewData = {}
 		for _, T in pairs(data) do		table.insert(NewData, T.name)		end
 		return NewData
-	end) :: Multiple.UseCursor?
+	end)
 end
 
 --			Types			--
