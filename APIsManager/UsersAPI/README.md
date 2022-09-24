@@ -4,7 +4,7 @@
 **Parameters:** `Keyword: string`, `Limits: number`
 
 **Return:**
-```
+```lua
 {
     displayName: string,
     hasVerifiedBadge: boolean,
@@ -19,7 +19,9 @@ ___
 
 **Parameters:** `UserId: number`
 
-**Return:** {
+**Return:**
+```lua
+{
     description: string,
 	created: string,
 	isBanned: boolean,
@@ -29,4 +31,5 @@ ___
 	name: string,
 	displayName: string
 }
+```
 ___
