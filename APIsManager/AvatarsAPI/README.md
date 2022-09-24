@@ -66,16 +66,16 @@
 - **Return:**
 ````lua
 {
-	assets: {
-       [number]: {
-          assetType:{
-			id: number,
+    assets: {
+        [number]: {
+	    assetType:{
+	        id: number,
+		name: string
+	    },
+       	    currentVersionId: number,
+	    id: number,
             name: string
-		  },
-          currentVersionId: number,
-          id: number,
-          name: string
-       },
+	},
     },
     bodyColors: {
        headColorId: number,
