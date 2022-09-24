@@ -17,15 +17,17 @@ ___
 - **Parameters:** `UserId: number`
 - **Return:**
 ```lua
-{
-    description: string,
-    created: string,
-    isBanned: boolean,
-    externalAppDisplayName: string,
-    hasVerifiedBadge: boolean,
-    id: number,
-    name: string,
-    displayName: string
+Data: {
+    [number]: {
+        description: string,
+        created: string,
+        isBanned: boolean,
+        externalAppDisplayName: string,
+        hasVerifiedBadge: boolean,
+        id: number,
+        name: string,
+       displayName: string
+    }
 }
 ```
 ___
