@@ -5,16 +5,16 @@
 ````lua
 {
 	assets: {
-        [number]: {
-    		assetType: {
-	    		id: number,
-		    	name: string
-    		},
-	    	currentVersionId: number,
-		    id: number,
-		    name: string
-	    }
-    },
+		[number]: {
+			assetType: {
+				id: number,
+				name: string
+			},
+			currentVersionId: number,
+			id: number,
+			name: string
+		}
+	},
 	bodyColors: {
 		headColorId: number,
 		leftArmColorId: number,
@@ -26,12 +26,12 @@
 	defaultPantsApplied: boolean,
 	defaultShirtApplied: boolean,
 	emotes: {
-        [number]: {
-		    assetId: number,
-	    	assetName: string,
-    		position: number
-    	}
-    },
+		[number]: {
+			assetId: number,
+			assetName: string,
+			position: number
+		}
+	},
 	playerAvatarType: string,
 	scales: {
 		bodyType: number,
