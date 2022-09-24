@@ -3,9 +3,9 @@
 Module for Roblox Studio to easily manage API access through Google.
 _____
 # Index
-1. Start - Google
-2. Start - Roblox Studio
-3. Global classes
+1. [Start - Google](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---google)
+2. [Start - Roblox Studio](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---roblox-studio)
+3. [Global classes](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---roblox-studio)
 ______
 ______
 # Start - Google
