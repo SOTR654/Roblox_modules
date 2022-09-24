@@ -3,17 +3,16 @@
 
 **Parameters:** `Keyword: string`, `Limits: number`
 
-**Return:** {
+**Return:**
+```
+{
     displayName: string,
-
     hasVerifiedBadge: boolean,
-
     id: number,
-    
     name: string,
-
     previousUsernames: {string}
 }
+```
 ___
 # UserInfo
 **Description:** Obtains user information from their UserId.
