@@ -43,3 +43,18 @@
 	}
 }
 ````
+# GetOutfits
+- **Description:** Get information about the given user's outfits.
+- **Parameters:** `UserId: number`
+- **Return:**
+````lua
+{
+	[number]: {
+		id: number,
+		isEditable: number,
+		name: string
+	}
+}
+````
+
+
