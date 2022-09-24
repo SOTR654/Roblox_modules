@@ -66,8 +66,8 @@ ___
   NextCursor: string,
 	
   --			Methods			--
-  Next: (self) -> (),
-  Before: (self) -> ()
+  Next: (self) -> boolean,
+  Before: (self) -> boolean
 ```
 * **Example:** 
 ```lua
