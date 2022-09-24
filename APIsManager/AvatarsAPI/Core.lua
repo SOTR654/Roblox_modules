@@ -2,6 +2,8 @@ local Multiple = require(script.Parent.Multiple)
 local Bases = {
 	AvatarInfo = "https://avatar.roblox.com/v1/users/%d/avatar",
 	Outfits = "https://avatar.roblox.com/v1/users/%d/outfits",
+	CurrentAssets = "https://avatar.roblox.com/v1/users/%d/currently-wearing",
+	OutfitId = "https://avatar.roblox.com/v1/outfits/%d/details"
 }
 
 
@@ -21,6 +23,20 @@ function Methods:GetOutfits(UserId: number): {[number]: {id: number, isEditable:
 
 	--			Return			--
 	return Get.data
+end
+function Methods:GetCurrentAssets(UserId: number): {number}?
+	local Link = Bases.CurrentAssets:format(UserId)
+
+	--			Check			--
+	local Get = Multiple.GetAsync(Link, self.GoogleUrl)
+	if not Get then		return nil		end
+
+	--			Return			--
+	return Get.assetIds
+end
+function Methods:GetOutfitIdDetails(OutfitId: number): OutfitInfo
+	local Link = Bases.OutfitId:format(OutfitId)
+	return Multiple.GetAsync(Link, self.GoogleUrl)
 end
 
 --			Types			--
@@ -51,6 +67,40 @@ export type AvatarInfo = {
 	}},
 	playerAvatarType: string,
 	scales: {
+		bodyType: number,
+		depth: number,
+		head: number,
+		height: number,
+		proportion: number,
+		width: number
+	}
+}
+export type OutfitInfo = {
+	assets: {
+		[number]: {
+			assetType:{
+				id: number,
+				name: string
+			},
+			currentVersionId: number,
+			id: number,
+			name: string
+		},
+	},
+	bodyColors: {
+		headColorId: number,
+		leftArmColorId: number,
+		leftLegColorId: number,
+		rightArmColorId: number,
+		rightLegColorId: number,
+		torsoColorId: number
+	},
+	id: number,
+	isEditable: boolean,
+	name: string,
+	outfitType: string,
+	playerAvatarType: string,
+	scale: {
 		bodyType: number,
 		depth: number,
 		head: number,
