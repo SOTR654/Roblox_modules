@@ -1,6 +1,7 @@
 local Multiple = require(script.Parent.Multiple)
 local Bases = {
 	AvatarInfo = "https://avatar.roblox.com/v1/users/%d/avatar",
+	Outfits = "https://avatar.roblox.com/v1/users/%d/outfits",
 }
 
 
@@ -10,6 +11,16 @@ local Methods = {}
 function Methods:AvatarInfo(UserId: number): AvatarInfo
 	local Link = Bases.AvatarInfo:format(UserId)
 	return Multiple.GetAsync(Link, self.GoogleUrl)
+end
+function Methods:GetOutfits(UserId: number): {[number]: {id: number, isEditable: number, name: string}}?
+	local Link = Bases.Outfits:format(UserId)
+	
+	--			Check			--
+	local Get = Multiple.GetAsync(Link, self.GoogleUrl)
+	if not Get then		return nil		end
+
+	--			Return			--
+	return Get.data
 end
 
 --			Types			--
