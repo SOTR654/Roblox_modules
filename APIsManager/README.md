@@ -1,12 +1,9 @@
-
-# Description
-Module for Roblox Studio to easily manage API access through Google.
-_____
+**Description:** module for Roblox Studio to easily manage API access through Google.
 # Index
 1. [Start - Google](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---google)
 2. [Start - Roblox Studio](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---roblox-studio)
 3. [Global classes](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#start---roblox-studio)
-______
+
 ______
 # Start - Google
 1. Go ```https://script.google.com/home/``` and log in.
@@ -59,6 +56,20 @@ local APIsManager = require(game:GetService("ServerStorage").APIsManager).new(Sc
 ___
 
 # Global classes
+## CursorObject
+* **Type:** 
+```lua
+  --			Properties			--
+  Data: {string},
+  HistoryData: {[number]: {string}}
+  PageIndex: number,
+  NextCursor: string,
+	
+  --			Methods			--
+  Next: (self) -> (),
+  Before: (self) -> ()
+```
+* **Example:** 
 ```lua
 local Cursor = APIsManager.UsersAPI:NameHistory(UserName, 50, true)
 
