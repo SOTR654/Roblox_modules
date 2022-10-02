@@ -2,7 +2,7 @@
 - **Description:** Search for information from users with names similar to `Keyword`
 - **Parameters:** `Keyword: string`, `Limits: number`
 - **Return:** [`CursorObject`](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#cursorobject)
-* **Cursor data:**
+- **Cursor data:**
 ````lua
 {
     [number]: {
