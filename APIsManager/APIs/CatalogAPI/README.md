@@ -1,3 +1,10 @@
+# Index
+
+* [By HTTP](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager/APIs/CatalogAPI#by-http)
+
+* [By Roblox](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager/APIs/CatalogAPI#by-roblox)
+
+___
 # By HTTP
 ## GetBundlesWithAsset
 - **Description:** Get all bundles with the given AssetId.
