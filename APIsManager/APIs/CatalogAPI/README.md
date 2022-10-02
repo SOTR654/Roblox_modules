@@ -8,7 +8,7 @@ ___
 # By HTTP
 ## GetBundlesWithAsset
 - **Description:** Get all bundles with the given AssetId.
-- **Parameters:** `AssetId: string, Limit: number, Asc: boolean`
+- **Parameters:** `AssetId: number, Limit: number, Asc: boolean`
 - **Return:** [`CursorObject`](https://github.com/SOTR654/Roblox_modules/tree/main/APIsManager#cursorobject)
 - **Cursor data:**
 ````lua
@@ -43,7 +43,40 @@ ___
 	}
 }
 ````
-
+## GetBundleInfo
+- **Description:** Get information about the given BundleId.
+- **Parameters:** `BundleId: numbern`
+- **Return:**
+````lua
+{
+	bundleType: string,
+	creator: {
+		id: number,
+		name: string,
+		type: string
+	},
+	description: string,
+	id: number,
+	itemRestrictions: {string},
+	items: {
+		[number]: {
+			id: number,
+			name: string,
+			owned: boolean,
+			type: string
+		},
+	},
+	name: string,
+	product: {
+		id: number,
+		isForSale: boolean,
+		isFree: boolean,
+		isPublicDomain: boolean,
+		priceInRobux: number,
+		type: string
+	}
+}
+````
 
 
 # By Roblox
