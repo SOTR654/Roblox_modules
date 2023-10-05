@@ -1,92 +1,135 @@
+--	Made by SOTR654
 local DSS = game:GetService("DataStoreService")
-local HTTPS = game:GetService("HttpService")
-local function F_pcall(Base: any, Function: string, ...): (boolean, any)
-	--		Success		--
-	local T = {pcall(Base[Function], Base, ...)}
-	if T[1] then		return unpack(T, 2)		end
+local Limits = {
+	Max = {
+		Get = {B = 60, P = 10},				--> GetAsync
+		Set = {B = 60, P = 10},				--> SetAsync, IncrementAsync, UpdateAsync, RemoveAsync
+		GetSorted = {B = 5, P = 2},			--> GetSortedAsync
+		GetVersion = {B = 5, P = 2},		--> GetVersionAsync
+		List = {B = 5, P = 2},				--> ListDataStoresAsync, ListKeysAsync, ListVersionAsync
+		ListRemove = {B = 5, P = 2},		--> RemoveVersionAsync
+	} :: {[string]: {B: number, P: number, N: number}},
+	Using = {},
+}
+for k, T in pairs(Limits.Max) do
+	T.N, Limits.Using[k] = T.B, 0
+end
 
-	--		Error		--
-	warn(("Error with %s:"):format(Function), ..., "\n", T[2])
-	return false, nil
+--		Functions		--
+local function CheckLimits(Type: string)
+	if Limits.Max[Type].N >= Limits.Using[Type] then		return		end
+	Limits.Using[Type] += 1
+	task.delay(60, function()		Limits.Using[Type] -= 1		end)
+	return true
 end
 
 --		Types		--
-export type GlobalDataStore = {
-	--		Properties			--
-	Cache: any,
-	DataStore: DataStore,
-	DataStoreInfo: {string},
+type Response = "Success"|"Error"|"Offline"|"Limit"
+export type DataManager = {
+	DS: DataStore|OrderedDataStore,
+	TableKey: string,
+	Cache: {[string]: any},
+	
+	--		Methods - global		--
+	Get: (self: DataManager, K: string, O: DataStoreOptions?) -> (Response, any, DataStoreKeyInfo),
+	Set: (self: DataManager, K: string, V: any, U: {number}?, O: DataStoreSetOptions?) -> Response,
+	Remove: (self: DataManager, K: string) -> (Response, any, DataStoreKeyInfo),
+	Update: (self: DataManager, K: string, F: (any) -> any, O: DataStoreSetOptions?) -> (Response, any, DataStoreKeyInfo),
+	Increment: (self: DataManager, K: string, D: number, U: {number}?, O: DataStoreOptions?) -> (Response, number?),
 
-	--		Methods			--
-	GetAsync: (self: GlobalDataStore, key: string) -> (boolean, any, DataStoreKeyInfo?),
-	RemoveAsync: (self: GlobalDataStore, key: string) -> (boolean, any),
-	IncrementAsync: (self: GlobalDataStore, key: string, increment: number) -> (),
-}
-export type DS = GlobalDataStore&{
-	SetAsync: (self: DS, key: string, value: any, userids: {number}?, options: DataStoreOptions?) -> (),
-}
-export type ODS = GlobalDataStore&{
-	SetAsync: (self: ODS, key: string, value: any) -> (),
-	GetSortedAsync: (self: ODS, ascending: boolean, pagesize: number, minValue: number?, maxValue: number?) -> DataStorePages,
+	--		Methods - order		--
 }
 
 
 
---		Return		--
-local GlobalDataStore = {"GetAsync", "SetAsync", "RemoveAsync", "IncrementAsync"}
-local Storage, DS, ODS = {}, {}, {"IncrementAsync"}
-return function(n: string, s: string?, Type: "Normal"|"Ordered")
-	--		Check and get		--
-	assert(type(n) == "string", "Name must be a string")
-	assert(table.find({"nil","string"}, typeof(s)), 'Scope must be a string or nil')
-	assert(table.find({"Normal","Ordered"}, Type), 'Type must be a "SortedMap" or "Queue"')
-	
-	local FullName = n .. (s or "")
-	if Storage[FullName] then		return Storage[FullName]		end
-	
-	
-	
-	--		New		--
-	local self = {
-		Cache = {},
-		DataStore = DSS[if Type == "Normal" then "GetDataStore" else "GetOrderedDataStore"](n, s),
-	}
-	local function Connect(Function: string)
-		self[Function] = function(_, key: string, value: any, ...)
-			--		No doble set		--
-			if Function == "SetAsync" then
-				local _, T1 = F_pcall(HTTPS, "JSONEncode", value)
-				local _, T2 = F_pcall(HTTPS, "JSONEncode", self.Cache[key])
-				if T1 == T2 then		return		end
+--		Methods		--
+local Methods: DataManager = {} :: DataManager
+for T, L in pairs({Get = {"Get"}, Set = {"Increment", "Set", "Update", "Remove"}}) do
+	for _, v in pairs(L) do
+		Methods[v] = function(self, K: string, value, ...): (Response, any)
+			if not CheckLimits(T) then		return "Limit"		end
+
+
+			--		Set and save?		--
+			if self.DS then
+				local List = {pcall(self.DS[v.."Async"], self.DS, K, value, ...)}
+				if List[1] then
+					self.Cache[K] = (
+						if v == "Set" then
+							value
+							elseif v == "Remove" then
+							nil
+							elseif table.find({"Increment", "Get", "Update"}, v) then
+							List[2]
+							else
+							0
+					)
+					return "Success", unpack(List, 2)
+				else
+					return "Error", warn("Error with GetAsync:", K, self.TableKey, List[2])
+				end
+			else
+				if K == "Get" then
+					return "Offline", self.Cache[K]
+				else
+					local new = value(self.Cache[K])
+					self.Cache[K] = (
+						if v == "Set" then
+							value
+							elseif v == "Remove" then
+							nil
+							elseif v == "Increment" then
+							(self.Cache[K]or 0)+value
+							elseif v == "Update" then
+							(if typeof(new) ~= "nil" then new else self.Cache[K])
+							else
+							0
+					)
+				end
+				return "Offline"
 			end
-
-
-
-			--		Pcall		--
-			local T = {F_pcall(self.DataStore, Function, key, value, ...)}
-			if not T[1] then		return		end
-
-			--		Cache		--
-			if Function == "GetAsync" then
-				self.Cache[key] = T[2]
-			elseif Function == "SetAsync" then
-				self.Cache[key] = value
-			elseif Function == "RemoveAsync" then
-				self.Cache[key] = nil
-			end
-			return unpack(T, 2)
 		end
 	end
-	for _, F in pairs(GlobalDataStore) do		Connect(F)		end
-	for _, F in pairs(if Type == "Normal" then DS else ODS) do		Connect(F)		end
-	
-	
-	
-	--		Save		--
-	Storage[FullName] = self
-	return Storage[FullName]
-end :: (
-	(Name: string, Scope: string?, Type: "Normal") -> DS
-)&(
-	(Name: string, Scope: string?, Type: "Ordered") -> ODS
-)
+end
+
+
+
+
+--		Limits by players		--
+game:GetService("Players").PlayerAdded:Connect(function()
+	for _, T in pairs(Limits.Max) do		T.N += T.P		end
+end)
+game:GetService("Players").PlayerRemoving:Connect(function()
+	for _, T in pairs(Limits.Max) do		T.N -= T.P		end
+end)
+
+
+
+--		Create		--
+local Storage = {}
+local function GetDataStore(Mode: string)
+	return function(Name: string, Scope: string?): DataManager
+		--		Before		--
+		local TableKey = ("%s_%s_%s"):format(Name, Scope or"", Mode)
+		if Storage[TableKey] then		return Storage[TableKey]		end
+
+
+		--		Can use DataStoreService?		--
+		local S1, DS = pcall(DSS[("Get%sDataStore"):format((Mode=="Order"and"Ordered")or"")], DSS, Name, Scope)
+		if not S1 then
+			warn("Could not access datastore, offline mode will be used:", TableKey, DS)
+			DS = nil
+		end
+
+
+		--		Data table		--
+		local self: DataManager = table.clone(Methods)
+		self.Cache = {["Server"] = {}, ["Player"] = {}}
+		self.DS, self.TableKey = DS, TableKey
+		return self
+	end
+end
+return {
+	Order = GetDataStore("Order"),
+	Normal = GetDataStore("Normal"),
+}
